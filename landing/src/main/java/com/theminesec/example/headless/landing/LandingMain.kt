@@ -7,6 +7,7 @@ import android.nfc.NfcAdapter
 import android.nfc.tech.IsoDep
 import android.nfc.tech.NfcA
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -48,6 +49,8 @@ abstract class LandingMain : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // After each pin entry this get called, which means host activity gets re-created
+        Log.d("LifeCycleDebug", "ON CREATE")
 
         val viewModel: HelperViewModel by viewModels()
         var completedSaleTranId: String? by mutableStateOf(null)
