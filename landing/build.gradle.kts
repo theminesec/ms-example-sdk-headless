@@ -1,6 +1,7 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -8,7 +9,7 @@ android {
     compileSdk = 35
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 30
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
@@ -22,9 +23,6 @@ android {
     }
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packagingOptions {
         resources {
@@ -60,7 +58,7 @@ dependencies {
     //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
     val versionHeadless: String by project
-    implementation("com.theminesec.sdk:headless-stage:$versionHeadless")
+    implementation("com.theminesec.sdk:headless-mpoc-stage:${versionHeadless}")
     //debugImplementation("com.theminesec.sdk:headless-stage:$versionHeadless")
     //releaseImplementation("com.theminesec.sdk:headless:$versionHeadless")
 }

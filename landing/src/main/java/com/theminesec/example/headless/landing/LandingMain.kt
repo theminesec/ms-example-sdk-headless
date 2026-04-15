@@ -3,6 +3,7 @@ package com.theminesec.example.headless.landing
 import android.app.PendingIntent
 import android.content.Intent
 import android.content.IntentFilter
+import android.graphics.drawable.Icon
 import android.nfc.NfcAdapter
 import android.nfc.tech.IsoDep
 import android.nfc.tech.NfcA
@@ -14,8 +15,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.*
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +28,6 @@ import androidx.lifecycle.lifecycleScope
 import com.theminesec.example.headless.landing.ui.HelperLayout
 import com.theminesec.example.headless.landing.ui.component.ThemedButton
 import com.theminesec.lib.dto.common.Amount
-import com.theminesec.lib.dto.common.toCurrency
 import com.theminesec.lib.dto.poi.CvmSignatureMode
 import com.theminesec.lib.dto.poi.PoiRequest
 import com.theminesec.lib.dto.poi.Referencable
@@ -144,7 +142,6 @@ abstract class LandingMain : ComponentActivity() {
                     onClick = { viewModel.resetRandomPosReference() },
                     modifier = Modifier.fillMaxWidth()
                 ) {
-                    Icon(imageVector = Icons.Default.Refresh, contentDescription = null)
                     Spacer(modifier = Modifier.size(4.dp))
                     Text(text = "Set random POS message ID")
                 }
@@ -200,7 +197,7 @@ abstract class LandingMain : ComponentActivity() {
                             tranType = TranType.SALE,
                             amount = Amount(
                                 value = viewModel.amountStr.toBigDecimal(),
-                                currency = viewModel.currency.toCurrency(),
+                                currency = Currency.getInstance(viewModel.currency),
                             ),
                             profileId = viewModel.profileId,
                             tapToOwnDevice = ttod,

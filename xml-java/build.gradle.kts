@@ -3,6 +3,7 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("org.jetbrains.kotlin.plugin.compose")
 }
 
 android {
@@ -11,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.theminesec.example.headless.xml.java"
-        minSdk = 26
+        minSdk = 30
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -36,9 +37,6 @@ android {
     buildFeatures {
         viewBinding = true
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
     }
     packagingOptions {
         resources {
@@ -68,7 +66,7 @@ dependencies {
     implementation(project(":landing"))
 
     val versionHeadless: String by project
-    implementation("com.theminesec.sdk:headless-stage:$versionHeadless")
+    implementation("com.theminesec.sdk:headless-mpoc-stage:${versionHeadless}")
     //debugImplementation("com.theminesec.sdk:headless-stage:$versionHeadless")
     //releaseImplementation("com.theminesec.sdk:headless:$versionHeadless")
 }

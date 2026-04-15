@@ -11,10 +11,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.unit.dp
 import com.theminesec.lib.dto.common.Amount
-import com.theminesec.lib.dto.poi.PoiRequest
 import com.theminesec.lib.dto.transaction.PaymentMethod
+
 import com.theminesec.sdk.headless.HeadlessActivity
-import com.theminesec.sdk.headless.model.transaction.CardReadExtract
 import com.theminesec.sdk.headless.ui.ThemeProvider
 import com.theminesec.sdk.headless.ui.UiProvider
 import com.theminesec.sdk.headless.ui.UiState
@@ -25,14 +24,6 @@ class HeadlessImplWithUiProvider : HeadlessActivity() {
     override fun provideTheme(): ThemeProvider = ClientHeadlessThemeProvider()
     override fun provideUi(): UiProvider = ClientUiProvider()
 
-    override suspend fun interceptBeforeOnline(
-        originalRequest: PoiRequest.ActionNew,
-        cardReadExtract: CardReadExtract
-    ): PoiRequest.ActionNew? {
-        Log.d("HL/ Impl", "interceptBeforeOnline: delaying, $cardReadExtract")
-        delay(3.seconds)
-        return null
-    }
 }
 
 class ClientHeadlessThemeProvider : ThemeProvider() {
@@ -51,12 +42,12 @@ class ClientHeadlessThemeProvider : ThemeProvider() {
 
 class ClientUiProvider : UiProvider() {
     @Composable
-    override fun AmountDisplay(amount: Amount, description: String?) {
+    override fun AmountDisplay(amount: Amount, title: String?, description: String?) {
         Box(
             modifier = Modifier.border(1.dp, Color.Red),
             contentAlignment = Alignment.Center
         ) {
-            super.AmountDisplay(amount, description)
+            super.AmountDisplay(amount, title, description)
         }
     }
 
