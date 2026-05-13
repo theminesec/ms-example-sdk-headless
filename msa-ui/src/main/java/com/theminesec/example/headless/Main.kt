@@ -5,5 +5,5 @@ import com.theminesec.sdk.headless.HeadlessActivity
 
 class Main : LandingMain() {
     override val headlessImplClass: Class<out HeadlessActivity>
-        get() = HeadlessImplMsaUi::class.java
+        get() = ExampleBdoHeadlessImpl::class.java
 }

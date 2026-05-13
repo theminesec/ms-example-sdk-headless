@@ -20,7 +20,7 @@
         </activity>
 
         <activity
-            android:name=".HeadlessImplMsaUi"
+            android:name=".ExampleBdoHeadlessImpl"
             android:launchMode="singleTask" />
     </application>
 </manifest>

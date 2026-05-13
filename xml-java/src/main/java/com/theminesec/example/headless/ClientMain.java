@@ -68,6 +68,7 @@ public class ClientMain extends AppCompatActivity {
                 false,
                 null,
                 null,
+                null,
                 null
         ));
     }
@@ -91,6 +92,7 @@ public class ClientMain extends AppCompatActivity {
                 false,
                 null,
                 null,
+                null,
                 null
         ));
     }
@@ -112,6 +114,7 @@ public class ClientMain extends AppCompatActivity {
                 null,
                 false,
                 false,
+                null,
                 null,
                 null,
                 null

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">HlExample MSA UI</string>
     <string name="var_copyright">© %1$s Some Copyrighted</string>
+    <string name="et_code_money">Amount</string>
 </resources>
