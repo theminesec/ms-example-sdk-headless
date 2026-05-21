@@ -11,10 +11,10 @@ dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
         google()
-        mavenCentral()
+//        mavenCentral()
         //mavenLocal()
 
-        // MineSec's maven registry
+//         MineSec's maven registry — disabled to test Maven Central
         maven {
             val MINESEC_REGISTRY_LOGIN: String? by settings
             val MINESEC_REGISTRY_TOKEN: String? by settings
@@ -41,6 +41,7 @@ dependencyResolutionManagement {
                 password = MINESEC_REGISTRY_TOKEN
             }
         }
+        mavenCentral()
     }
 }
 
