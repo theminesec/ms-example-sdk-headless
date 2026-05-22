@@ -4,7 +4,7 @@ const val HLTAG = "HL/Example"
 
 @Suppress("ConstPropertyName")
 object BaseConfig {
-    const val profileId = "prof_01JC0KTX9GH9WCMEXZN8G3HCQZ"
-    const val licenseName = "public-test.license"
-    const val currency = "HKD"
+    const val profileId = "prof_01KN3HXNZM9QK0M3Z1JNZVWG1T"
+    const val licenseName = "Wallyt-lic_01J19YETWSR4QDEJ9QAVHJM7SZ-20241024_131558.license"
+    const val currency = "PHP"
 }
