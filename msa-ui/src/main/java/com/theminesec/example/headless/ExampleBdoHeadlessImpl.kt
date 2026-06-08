@@ -304,7 +304,7 @@ private fun UiState.toBdoDisplay() = when (this) {
     is UiState.Awaiting.Retryable -> when (this.res) {
         com.theminesec.sdk.headless.R.string.ui_state_desc_awaiting_retryable_unsupported_payment ->
             "Card not supported\nAsk for another card"
-        else -> "Incomplete card read\nplease tap and hold the card steadily"
+        else -> stringResource(res ?: com.theminesec.sdk.headless.R.string.ui_state_desc_awaiting_retryable_default_invalid_read)
     }
 
     is UiState.Processing -> "We're working on it!"
