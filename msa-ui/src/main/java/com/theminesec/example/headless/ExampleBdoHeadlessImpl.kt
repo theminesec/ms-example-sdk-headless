@@ -44,6 +44,7 @@ import com.theminesec.sdk.headless.ui.component.SignatureState
 import com.theminesec.sdk.headless.ui.component.resource.Icon
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.StateFlow
+import java.util.Locale
 
 class ExampleBdoHeadlessImpl : HeadlessActivity() {
     override val experimentalScreenProvider = true
@@ -438,10 +439,12 @@ fun BdoAmountDisplay(
             color = bdoColorPrimaryForeground,
         )
         Spacer(Modifier.height(8.dp))
+        val amountNumberText = amount.toDisplayString(locale = Locale.US, showCurrency = false)
         Text(
-            text = amount.toDisplayString(),
-            style = BdoTypeStyles.title,
+            text = "${amount.currency.currencyCode.uppercase()} $amountNumberText",
+            style = if (amountNumberText.length > 9) BdoTypeStyles.title.copy(fontSize = 22.sp) else BdoTypeStyles.title,
             color = bdoColorPrimaryForeground,
+            softWrap = false,
         )
     }
     Spacer(Modifier.height(36.dp))
