@@ -67,6 +67,7 @@ object ExampleScreenProvider : ScreenProvider() {
         ) {
             BdoTopEdgeSection {
                 BdoToolbar()
+                BdoPromoBanner()
                 BdoAmountDisplay(poiRequest.amount)
             }
             // body part
@@ -110,6 +111,7 @@ object ExampleScreenProvider : ScreenProvider() {
         ) {
             BdoTopEdgeSection {
                 BdoToolbar(onAbort)
+                BdoPromoBanner()
                 BdoAmountDisplay(poiRequest.amount)
             }
 
@@ -202,6 +204,7 @@ object ExampleScreenProvider : ScreenProvider() {
         ) {
             BdoTopEdgeSection {
                 BdoToolbar()
+                BdoPromoBanner()
                 BdoAmountDisplay(poiRequest.amount)
             }
 
@@ -355,6 +358,13 @@ private object BdoTypeStyles {
         fontSize = 30.sp,
         lineHeight = 36.sp,
     )
+    val promoBanner = defaultTypography.bodySmall.copy(
+        fontFamily = nunito,
+        fontWeight = FontWeight.Bold,
+        fontSize = 20.sp,
+        lineHeight = 28.sp,
+        textAlign = TextAlign.Left,
+    )
 }
 
 // shared component
@@ -419,6 +429,20 @@ fun BdoToolbar(
         )
         Spacer(Modifier.size(16.dp))
     }
+}
+
+@Composable
+fun BdoPromoBanner(
+    text: String = "BDO BUY NOW, PAY LATER",
+) {
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 16.dp, start = 16.dp, end = 16.dp),
+        text = text,
+        style = BdoTypeStyles.promoBanner,
+        color = bdoColorPrimaryForeground,
+    )
 }
 
 @Composable
