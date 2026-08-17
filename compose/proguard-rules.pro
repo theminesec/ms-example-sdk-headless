@@ -21,5 +21,4 @@
 #-renamesourcefileattribute SourceFile
 
 # MC sensory branding with gson reflection
--keepattributes Signature
--keep class com.mastercard.sonic.** {*;}
+-optimizations !class/merging/vertical,!class/merging/horizontal
