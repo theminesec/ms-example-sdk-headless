@@ -14,7 +14,8 @@ dependencyResolutionManagement {
         mavenCentral()
         //mavenLocal()
 
-        // MineSec's maven registry
+        // MineSec's maven registry (client-facing: holds the formal/released SDK,
+        // i.e. what customers consume, artifactId `headless-stage` / `headless`)
         maven {
             val MINESEC_REGISTRY_LOGIN: String? by settings
             val MINESEC_REGISTRY_TOKEN: String? by settings
@@ -39,6 +40,32 @@ dependencyResolutionManagement {
             credentials {
                 username = MINESEC_REGISTRY_LOGIN
                 password = MINESEC_REGISTRY_TOKEN
+            }
+        }
+
+        // MineSec's internal QA registry, only needed when building against an
+        // unreleased RC (artifactId `headless-stage-rc` / `headless-rc`).
+        // Only wired up when explicitly requested (-PsdkChannel=rc), so the
+        // default build (formal SDK from the client registry above) never needs
+        // these credentials.
+        if (providers.gradleProperty("sdkChannel").orNull == "rc") {
+            maven {
+                val MS_INTERNAL_REGISTRY_USER: String? by settings
+                val MS_INTERNAL_REGISTRY_TOKEN: String? by settings
+
+                requireNotNull(MS_INTERNAL_REGISTRY_USER) {
+                    "Building against an RC SDK (-PsdkChannel=rc) requires " +
+                        "MS_INTERNAL_REGISTRY_USER / MS_INTERNAL_REGISTRY_TOKEN " +
+                        "(set in ~/.gradle/gradle.properties locally, or as CI secrets)."
+                }
+                requireNotNull(MS_INTERNAL_REGISTRY_TOKEN)
+
+                name = "MineSecMavenInternalRegistry"
+                url = uri("https://maven.pkg.github.com/theminesec/ms-registry-internal")
+                credentials {
+                    username = MS_INTERNAL_REGISTRY_USER
+                    password = MS_INTERNAL_REGISTRY_TOKEN
+                }
             }
         }
     }

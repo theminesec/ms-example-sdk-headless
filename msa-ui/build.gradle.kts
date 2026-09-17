@@ -53,8 +53,16 @@ dependencies {
     implementation("androidx.compose.material3:material3")
     implementation(project(":landing"))
 
+    // SDK channel selection, for CI to build against either the internal RC
+    // (QA verification, before promote) or the formal/released SDK (default,
+    // also what a plain local build uses):
+    //   ./gradlew :msa-ui:assembleDebug                                        -> release channel, versionHeadless from gradle.properties
+    //   ./gradlew :msa-ui:assembleDebug -PsdkChannel=rc -PsdkVersion=1.3.24-rc.2 -> RC from ms-registry-internal
+    //   ./gradlew :msa-ui:assembleDebug -PsdkVersion=1.3.25                     -> a specific formal release
     val versionHeadless: String by project
-    implementation("com.theminesec.sdk:headless-stage:$versionHeadless")
-    //debugImplementation("com.theminesec.sdk:headless-stage:$versionHeadless")
+    val sdkChannel = (project.findProperty("sdkChannel") as String?) ?: "release"
+    val sdkVersion = (project.findProperty("sdkVersion") as String?) ?: versionHeadless
+    val sdkArtifactId = if (sdkChannel == "rc") "headless-stage-rc" else "headless-stage"
+    implementation("com.theminesec.sdk:$sdkArtifactId:$sdkVersion")
     //releaseImplementation("com.theminesec.sdk:headless:$versionHeadless")
 }
