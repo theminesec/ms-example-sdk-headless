@@ -57,8 +57,14 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.6.1")
     //implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.3")
 
+    // Must track the same sdkChannel/sdkVersion as :msa-ui (which depends on
+    // this module) — otherwise a -PsdkChannel=rc build ends up with both the
+    // RC and release SDK aars on the classpath, and checkDebugDuplicateClasses
+    // fails on the DexProtector-obfuscated classes they share.
     val versionHeadless: String by project
-    implementation("com.theminesec.sdk:headless-stage:$versionHeadless")
-    //debugImplementation("com.theminesec.sdk:headless-stage:$versionHeadless")
+    val sdkChannel = (project.findProperty("sdkChannel") as String?) ?: "release"
+    val sdkVersion = (project.findProperty("sdkVersion") as String?) ?: versionHeadless
+    val sdkArtifactId = if (sdkChannel == "rc") "headless-stage-rc" else "headless-stage"
+    implementation("com.theminesec.sdk:$sdkArtifactId:$sdkVersion")
     //releaseImplementation("com.theminesec.sdk:headless:$versionHeadless")
 }
